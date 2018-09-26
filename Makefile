@@ -30,7 +30,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = CS470.skel1.0.0
-DISTDIR = /mnt/c/Users/BASH/Desktop/CS470.skel/.tmp/CS470.skel1.0.0
+DISTDIR = /home/bash/CS470.skel/.tmp/CS470.skel1.0.0
 SUBTARGETS    =  \
 		release \
 		debug
