@@ -8,7 +8,7 @@
 //
 //	Written by :	BASHIR AHAMED
 //			SHOFIQUR RAHMAN
-//		FALL 2018
+//	Semester   :	FALL 2018
 //
 void
 HW_clip(ImagePtr I1, int t1, int t2, ImagePtr I2)
