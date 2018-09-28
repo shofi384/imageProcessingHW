@@ -48,7 +48,7 @@ HW_quantize(ImagePtr I1, int levels, bool dither, ImagePtr I2)
 		int type;
 		double bias = scale/2.0;
 		int addNoise; // add noise if the noise substracted from neighbors, else subtract
-		int noise;
+		int withNoise;
 
 		ChannelPtr<uchar> p1, p2;
 
@@ -59,10 +59,10 @@ HW_quantize(ImagePtr I1, int levels, bool dither, ImagePtr I2)
 				addNoise = ( height %2) ? -1: 1;
 
 				for(int width = 0; width < w; ++width) {
-					noise = (*p1++) + ceil((double)rand()/RAND_MAX * bias * addNoise);
+					withNoise = (*p1++) + ceil((double)rand()/RAND_MAX * bias * addNoise);
 					addNoise *= -1;
 
-					*p2++ = lut[CLIP(noise, 0, MXGRAY)];
+					*p2++ = lut[CLIP( withNoise, 0, MXGRAY)];
 				}
 			}
 		}
