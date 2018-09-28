@@ -15,15 +15,12 @@ HW_quantize(ImagePtr I1, int levels, bool dither, ImagePtr I2)
 
 	IP_copyImageHeader(I1, I2);
 
-	int scale = MXGRAY/levels;
-	int bias = scale/2;
+	double scale = double(MXGRAY)/levels;
 
 	// assign the values of the look up table
-	//
-	
-	for(i = 0; i < MXGRAY; ++i)
-		lut[i] = i / scale * scale + bias;
 
+	for(i = 0; i < MXGRAY; ++i)
+		lut[i] = CLIP(int( floor(i/scale) * scale + scale/2 ), 0, MXGRAY); // Use maro function CLIP(int a, int b, int c): min(max(a.b),c)
 
 	// dither disabled
 	
