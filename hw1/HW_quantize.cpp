@@ -45,6 +45,27 @@ HW_quantize(ImagePtr I1, int levels, bool dither, ImagePtr I2)
 	// dither is enabled
 	
 	else {
+		int type;
+		double bias = scale/2.0;
+		int addNoise; // add noise if the noise substracted from neighbors, else subtract
+		int noise;
+
+		ChannelPtr<uchar> p1, p2;
+
+		for(int ch = 0; IP_getChannel(I1, ch, p1, type); ++ch) {
+			IP_getChannel(I2, ch, p2, type);
+			
+			for(int height = 0; height < h; ++height) {
+				addNoise = ( height %2) ? -1: 1;
+
+				for(int width = 0; width < w; ++width) {
+					noise = (*p1++) + ceil((double)rand()/RAND_MAX * bias * addNoise);
+					addNoise *= -1;
+
+					*p2++ = lut[CLIP(noise, 0, MXGRAY)];
+				}
+			}
+		}
 
 	}
 }
