@@ -27,7 +27,7 @@ HW_quantize(ImagePtr I1, int levels, bool dither, ImagePtr I2)
 
 	for(i = 0; i < MXGRAY; ++i)
 		 // Use maro function CLIP(int a, int b, int c): min(max(a.b),c)
-		lut[i] = CLIP(int( floor(i/scale) * scale + scale/2 ), 0, MXGRAY);
+		lut[i] = CLIP(int( floor(i/scale) * scale + scale/2 ), 0, MaxGray);
 
 	// dither disabled
 	
@@ -62,7 +62,7 @@ HW_quantize(ImagePtr I1, int levels, bool dither, ImagePtr I2)
 					withNoise = (*p1++) + ceil((double)rand()/RAND_MAX * bias * addNoise);
 					addNoise *= -1;
 
-					*p2++ = lut[CLIP( withNoise, 0, MXGRAY)];
+					*p2++ = lut[CLIP( withNoise, 0, MaxGray)];
 				}
 			}
 		}
